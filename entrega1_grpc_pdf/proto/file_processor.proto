@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package file_processor;
+
+message FileChunk {
+  string file_name = 1;
+  bytes content = 2;
+}
+
+message ProcessedFileChunk {
+  string file_name = 1;
+  bytes content = 2;
+  bool success = 3;
+  string status_message = 4;
+}
+
+service FileProcessorService {
+  rpc CompressPDF(stream FileChunk) returns (stream ProcessedFileChunk);
+}
